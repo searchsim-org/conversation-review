@@ -3,6 +3,8 @@ create schema if not exists audit_private;
 create extension if not exists pgcrypto with schema extensions;
 create table audit_private.invites (code_hash text primary key, reviewer text unique not null check (reviewer in ('A','B')), used_by uuid unique);
 create table audit_private.reviewers (user_id uuid primary key references auth.users(id), reviewer text unique not null check (reviewer in ('A','B')));
+alter table audit_private.invites enable row level security;
+alter table audit_private.reviewers enable row level security;
 revoke all on schema audit_private from public, anon, authenticated;
 create table public.audit_progress (
  user_id uuid primary key references auth.users(id),
@@ -36,7 +38,7 @@ begin
  if p_packet<>'7a4473668931765a3c9d' or jsonb_typeof(p_labels)<>'object' then raise exception 'Invalid packet or labels'; end if;
  for item in select * from jsonb_each(p_labels) loop
   if item.key !~ '^C(00[1-9]|0[1-9][0-9]|[12][0-9]{2}|3[0-6][0-9]|37[0-6])$' or jsonb_typeof(item.value)<>'object' then raise exception 'Invalid case'; end if;
-  for field,value in select key,value from jsonb_each_text(item.value) loop
+  for field,value in select j.key,j.value from jsonb_each_text(item.value) as j loop
    if field='reason' then
     if jsonb_typeof(item.value->field)<>'string' or length(value)>10000 then raise exception 'Invalid note'; end if;
    elsif field in ('restaurant_requirements','requested_information','normal_ending') then
