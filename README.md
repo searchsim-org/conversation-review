@@ -1,6 +1,6 @@
 # Conversation review
 
-Open the site and start a new review. It creates a unique reviewer ID and a private recovery code. No name, email address, or account is needed.
+Open the site and start a new review. It creates a unique reviewer ID and a private four-character recovery code. No name, email address, or account is needed.
 
 The same browser offers “Continue my review.” On another device, choose “Resume with a code.” Keep the recovery code private: it grants access to that review's answers. Copy it or download it before starting.
 
