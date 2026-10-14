@@ -79,4 +79,4 @@ $('startReview').onclick=()=>{
  try{let id=localStorage.getItem(browserIdKey);if(!id){id=crypto.randomUUID();localStorage.setItem(browserIdKey,id)}}catch(e){storageAvailable=false;$('startError').textContent='Browser storage is unavailable. You can still annotate, but download your labels before closing.'}
  $('reviewApp').hidden=false;$('startScreen').hidden=true;document.body.classList.add('review-started');$('taskHeading').focus();$('taskHeading').scrollIntoView({block:'start'});update();
 };
-</script><script src="config.js"></script><script src="session.js"></script><script src="unique-save.js"></script></body></html>
+</script><script src="config.js"></script><script src="session.js?v=4"></script><script src="unique-save.js?v=4"></script></body></html>
