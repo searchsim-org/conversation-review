@@ -1,3 +1,13 @@
+# Unique reviewer accounts and private backups
+
+The current site uses `unique-reviewers.sql` in addition to the original setup. It creates a new ID for each reviewer, with a randomly generated recovery code. Codes are stored as hashes on the server. The browser keeps its own recovery code and anonymous session.
+
+“Start a new review” creates a separate record. “Resume with a code” grants the current session access to the matching review. Knowing or choosing a reviewer ID alone grants no access. Reads are restricted to the review associated with the authenticated session; saves also check that association and the previous revision.
+
+Live checks passed for separate IDs and records, recovery on a different session, code normalization, blocked reads and writes to another review, rejected unknown codes, and stale-write protection. All temporary test records were removed.
+
+The original A/B tables remain unchanged so existing work can still be exported. The old setup is documented below for reference.
+
 # Private answer backups
 
 GitHub Pages hosts the annotation interface and public conversation records. It does not store answers. The Supabase database stores each reviewer's answers privately.

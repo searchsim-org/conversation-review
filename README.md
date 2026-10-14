@@ -1,9 +1,13 @@
 # Conversation review
 
-Two authors independently review 188 user tasks, with two conversations per task. The public site shows the conversation records and restaurant facts. It contains no prefilled judgments or simulator identities.
+Open the site and start a new review. It creates a unique reviewer ID and a private recovery code. No name, email address, or account is needed.
 
-Open the site, select your assigned reviewer, and start annotation. Answers save automatically in that browser. Download a backup whenever you pause. To continue from the offline files, download their labels and import them on the site.
+The same browser offers “Continue my review.” On another device, choose “Resume with a code.” Keep the recovery code private: it grants access to that review's answers. Copy it or download it before starting.
 
-Private server backups use Supabase and a separate code for each reviewer. The browser ID remembers the local session; it is not an access credential. See `annotation_backend/README.md` for server setup and the checks required before relying on backups.
+Each review covers 188 tasks and two conversations per task. Task order and conversation order are randomized for each ID and remain stable when resuming. Answers save immediately in the browser and automatically to the private Supabase database. Failed server saves leave the browser copy intact; stale sessions cannot overwrite a newer server copy.
 
-Only `annotation_site` is published through GitHub Pages. Annotation answers and private reviewer codes must never be committed.
+The public site shows conversation records and restaurant facts, with no prefilled judgments or simulator identities. Only `annotation_site` is published through GitHub Pages. Answers, session tokens, and recovery codes must never be committed.
+
+The old A/B pages remain available for exporting existing work. Start a unique review and import your own exported file. The new site asks for confirmation before importing a legacy A/B file.
+
+See `annotation_backend/unique-reviewers.sql` for the unique-ID database setup. Existing A/B records remain unchanged.
