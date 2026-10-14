@@ -14,4 +14,4 @@ Each code binds to one Supabase user. Only that user can read their answer recor
 
 The browser keeps answers immediately and sends a backup after a short pause. If server saving fails, browser saving continues and the page asks the author to reconnect or download. Clearing browser storage loses the anonymous login; an administrator must reassign access. Keep downloaded backups.
 
-Before relying on remote backups, test two separate reviewer accounts: each must be unable to read the other's answers, redeem the other's used code, write directly to the table, or save with a stale revision. These live checks require the configured project; they have not been run yet.
+Before relying on remote backups, test two separate reviewer accounts: each must be unable to read the other's answers, redeem the other's used code, write directly to the table, or save with a stale revision. The live project passed these checks with two temporary reviewer accounts and a third account without reviewer access. Invalid case IDs and answer values were also rejected. The temporary accounts and synthetic answers were removed afterward.
